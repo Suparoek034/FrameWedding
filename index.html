@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ทีน & เฟรม | Wedding Invitation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Georgia, serif;
+        background: linear-gradient(135deg, #eef4ff, #ffffff);
+        color: #444;
+      }
+      #welcome-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        color: #fff;
+      }
+      .welcome-card {
+        text-align: center;
+      }
+      .welcome-card button {
+        padding: 15px 40px;
+        border: none;
+        border-radius: 12px;
+        background: #fff;
+        color: #1e3a8a;
+        cursor: pointer;
+      }
+      .hero {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #123;
+        color: #fff;
+        text-align: center;
+      }
+      .overlay {
+        background: linear-gradient(
+          135deg,
+          rgba(10, 25, 47, 0.9),
+          rgba(27, 54, 93, 0.85)
+        );
+        padding: 50px;
+        border-radius: 24px;
+      }
+      section {
+        max-width: 1200px;
+        margin: auto;
+        padding: 60px 20px;
+      }
+      .title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #1e3a8a;
+      }
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        min-width: 120px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+      }
+      .gallery img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 16px;
+        cursor: pointer;
+      }
+      .details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 16px;
+      }
+      .color-theme {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .color {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+      .schedule li {
+        margin: 10px 0;
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        background: #eef4ff;
+      }
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+      }
+      #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+      #lightbox span {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #fff;
+        font-size: 40px;
+        cursor: pointer;
+      }
+      #petals {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .petal {
+        position: absolute;
+        top: -50px;
+        animation: fall linear forwards;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+      .map-btn {
+        display: inline-block;
+        margin-top: 15px;
+        background: #1e3a8a;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+      }
+      @media (max-width: 768px) {
+        .details {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="welcome-screen">
+      <div class="welcome-card">
+        <h2>Wedding Invitation</h2>
+        <h1>ทีน & เฟรม</h1>
+        <p>18 มกราคม 2570</p>
+        <button onclick="openInvitation()">เปิดการ์ดเชิญ</button>
+      </div>
+    </div>
+    <div id="petals"></div>
+
+    <section class="hero">
+      <div class="overlay">
+        <h1>ทีน & เฟรม</h1>
+        <p>ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส</p>
+        <p>18 มกราคม 2570</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">นับถอยหลังสู่งานแต่ง</h2>
+      <div class="countdown">
+        <div class="box">
+          <h3 id="days">0</h3>
+          วัน
+        </div>
+        <div class="box">
+          <h3 id="hours">0</h3>
+          ชั่วโมง
+        </div>
+        <div class="box">
+          <h3 id="minutes">0</h3>
+          นาที
+        </div>
+        <div class="box">
+          <h3 id="seconds">0</h3>
+          วินาที
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">Gallery</h2>
+      <div class="gallery">
+        <img src="photo1.jpg" onclick="showImage(this.src)" />
+        <img src="photo2.jpg" onclick="showImage(this.src)" />
+        <img src="photo3.jpg" onclick="showImage(this.src)" />
+        <img src="photo4.jpg" onclick="showImage(this.src)" />
+        <img src="photo5.jpg" onclick="showImage(this.src)" />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">รายละเอียดงาน</h2>
+      <div class="details">
+        <div class="card">
+          <h3>สถานที่จัดงาน</h3>
+          <p>โรงเรียนเวียงสระ อาคารหอประชุมเฟื้องฟ้า</p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.497702612839!2d99.34539657582512!3d8.644122994893202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3053dca32a096d0d%3A0x8b1d65ab4b25a0b5!2z4LmC4Lij4LiH4LmA4Lij4Li14Lii4LiZ4LmA4Lin4Li14Lii4LiH4Liq4Lij4LiwLg!5e0!3m2!1sth!2sth!4v1782028076199!5m2!1sth!2sth"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <a class="map-btn" target="_blank" href="https://maps.app.goo.gl/2YWTSyRwJTa2HF576"
+            >เปิด Google Maps</a
+          >
+        </div>
+        <div class="card">
+          <h3>Dress Code</h3>
+          <p>ฟ้า • น้ำเงิน • ขาว</p>
+          <div class="color-theme">
+            <div class="color" style="background: #8ec5fc"></div>
+            <div class="color" style="background: #1e3a8a"></div>
+            <div
+              class="color"
+              style="background: #fff; border: 1px solid #ddd"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>ขอบคุณที่ร่วมเป็นส่วนหนึ่งในวันสำคัญของเรา ❤️</footer>
+
+    <div id="lightbox">
+      <span onclick="closeLightbox()">×</span><img id="lightbox-img" />
+    </div>
+
+    <script>
+      function openInvitation() {
+        document.getElementById("welcome-screen").style.display = "none";
+      }
+      const targetDate = new Date("2027-01-18T18:00:00").getTime();
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        
+        if (diff <= 0) {
+          document.getElementById("days").innerText = "0";
+          document.getElementById("hours").innerText = "0";
+          document.getElementById("minutes").innerText = "0";
+          document.getElementById("seconds").innerText = "0";
+          return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+      function showImage(src) {
+        document.getElementById("lightbox").style.display = "flex";
+        document.getElementById("lightbox-img").src = src;
+      }
+      function closeLightbox() {
+        document.getElementById("lightbox").style.display = "none";
+      }
+      function createPetal() {
+        const p = document.createElement("div");
+        p.className = "petal";
+        p.innerHTML = "❀";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = 5 + Math.random() * 5 + "s";
+        document.getElementById("petals").appendChild(p);
+        setTimeout(() => p.remove(), 10000);
+      }
+      setInterval(createPetal, 500);
+    </script>
+  </body>
+</html>

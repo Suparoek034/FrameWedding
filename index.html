@@ -12,7 +12,7 @@
       }
       body {
         font-family: Georgia, serif;
-        background: linear-gradient(135deg, #eef4ff, #ffffff);
+        background: linear-gradient(135deg, #f0e6ff, #fff5e6);
         color: #444;
       }
       #welcome-screen {
@@ -27,6 +27,17 @@
       }
       .welcome-card {
         text-align: center;
+        z-index: 10;
+      }
+      .welcome-card h1 {
+        font-size: 3.5em;
+        margin: 15px 0;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      }
+      .welcome-card h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        opacity: 0.9;
       }
       .welcome-card button {
         padding: 15px 40px;
@@ -41,28 +52,93 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #123;
+        background: linear-gradient(135deg, #001a4d 0%, #0044aa 25%, #0099ff 50%, #00ccff 75%, #66e6ff 100%);
         color: #fff;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -15%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+      .hero::after {
+        content: '';
+        position: absolute;
+        bottom: -20%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(102, 230, 255, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(30px); }
       }
       .overlay {
         background: linear-gradient(
           135deg,
-          rgba(10, 25, 47, 0.9),
-          rgba(27, 54, 93, 0.85)
+          rgba(0, 26, 77, 0.75),
+          rgba(0, 68, 170, 0.75)
         );
-        padding: 50px;
-        border-radius: 24px;
+        padding: 80px 80px;
+        border-radius: 30px;
+        border: 2px solid rgba(102, 230, 255, 0.4);
+        box-shadow: 0 20px 80px rgba(0, 100, 200, 0.4), 
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+        position: relative;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+      }
+      .overlay h1 {
+        font-size: 4em;
+        margin-bottom: 25px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5),
+                     0 0 30px rgba(102, 230, 255, 0.3);
+        letter-spacing: 3px;
+        font-weight: bold;
+      }
+      .overlay p {
+        font-size: 1.6em;
+        letter-spacing: 1.5px;
+        margin: 12px 0;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        line-height: 1.6;
       }
       section {
         max-width: 1200px;
         margin: auto;
         padding: 60px 20px;
+        background: rgba(255, 255, 255, 0.7);
+        margin-bottom: 30px;
+        border-radius: 20px;
       }
       .title {
         text-align: center;
         margin-bottom: 30px;
         color: #1e3a8a;
+        font-size: 2.5em;
+        position: relative;
+        padding-bottom: 20px;
+      }
+      .title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #ff69b4, transparent);
       }
       .countdown {
         display: flex;
@@ -71,12 +147,18 @@
         flex-wrap: wrap;
       }
       .box {
-        background: #fff;
-        padding: 20px;
+        background: linear-gradient(135deg, #fff 0%, #f9e6ff 100%);
+        padding: 25px;
         border-radius: 15px;
         min-width: 120px;
         text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(255, 192, 203, 0.3);
+        transition: transform 0.3s ease;
+      }
+      .box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(255, 105, 180, 0.2);
       }
       .gallery {
         display: grid;
@@ -89,6 +171,12 @@
         object-fit: cover;
         border-radius: 16px;
         cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+      .gallery img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(255, 105, 180, 0.2);
       }
       .details {
         display: grid;
@@ -96,9 +184,15 @@
         gap: 20px;
       }
       .card {
-        background: #fff;
-        padding: 20px;
+        background: linear-gradient(135deg, #fff 0%, #faf8ff 100%);
+        padding: 30px;
         border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 192, 203, 0.2);
+      }
+      .card h3 {
+        color: #1e3a8a;
+        margin-bottom: 15px;
       }
       .color-theme {
         display: flex;
@@ -115,8 +209,11 @@
       }
       footer {
         text-align: center;
-        padding: 30px;
-        background: #eef4ff;
+        padding: 40px;
+        background: linear-gradient(135deg, #fff5e6, #ffe6f0);
+        border-top: 2px solid rgba(255, 192, 203, 0.3);
+        color: #1e3a8a;
+        font-size: 1.1em;
       }
       #lightbox {
         display: none;
@@ -149,10 +246,13 @@
         position: absolute;
         top: -50px;
         animation: fall linear forwards;
+        font-size: 2em;
+        opacity: 0.8;
       }
       @keyframes fall {
         to {
           transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
         }
       }
       .map-btn {
@@ -302,9 +402,32 @@
       function createPetal() {
         const p = document.createElement("div");
         p.className = "petal";
-        p.innerHTML = "❀";
+        
+        // Multiple flower emojis and colors
+        const flowers = ["🌸", "🌺", "🌼", "🌻", "🌷", "🌹"];
+        const colors = [
+          "#FFB6C1", // Light pink
+          "#FF69B4", // Hot pink
+          "#FFD700", // Gold
+          "#FF6347", // Tomato
+          "#FF1493", // Deep pink
+          "#FFA07A", // Light salmon
+          "#FFC0CB", // Pink
+          "#FF0000", // Red
+          "#FF8C00", // Dark orange
+          "#9370DB"  // Medium purple
+        ];
+        
+        const randomFlower = flowers[Math.floor(Math.random() * flowers.length)];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        p.innerHTML = randomFlower;
         p.style.left = Math.random() * 100 + "vw";
-        p.style.animationDuration = 5 + Math.random() * 5 + "s";
+        p.style.color = randomColor;
+        p.style.textShadow = `0 0 10px ${randomColor}, 0 0 5px rgba(0,0,0,0.2)`;
+        p.style.animationDuration = (5 + Math.random() * 5) + "s";
+        p.style.filter = `hue-rotate(${Math.random() * 60}deg)`;
+        
         document.getElementById("petals").appendChild(p);
         setTimeout(() => p.remove(), 10000);
       }

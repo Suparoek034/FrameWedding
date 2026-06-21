@@ -282,69 +282,64 @@
       .schedule-timeline {
         list-style: none;
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0;
-        padding: 30px 20px;
+        padding-left: 70px;
       }
       .schedule-timeline::before {
-        display: none;
+        content: '';
+        display: block;
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #2d5a7b, #6b9dc4);
       }
       .schedule-timeline li {
-        margin: 0;
-        padding: 0;
+        margin: 25px 0;
+        padding: 15px;
         position: relative;
-        background: transparent;
-        border-radius: 0;
-        box-shadow: none;
-        border-left: none;
-        display: flex;
-        align-items: center;
-        gap: 0;
+        background: rgba(255, 253, 208, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 3px solid #2d5a7b;
+        display: block;
       }
       .schedule-timeline li:not(:last-child)::after {
-        content: '';
-        width: 30px;
-        height: 2px;
-        background: #2d5a7b;
-        margin: 0 10px;
+        display: none;
       }
       .schedule-timeline li::before {
-        content: '○';
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
+        content: '';
+        position: absolute;
+        left: -53px;
+        top: 25px;
+        width: 15px;
+        height: 15px;
         background: #2d5a7b;
-        color: #fffdd0;
         border: 3px solid #fffdd0;
         border-radius: 50%;
         box-shadow: 0 0 0 3px #2d5a7b;
-        font-size: 24px;
-        margin: 0 15px;
-        position: static;
-        left: auto;
-        top: auto;
+        font-size: 0;
+        margin: 0;
       }
       .schedule-time {
-        display: none;
+        display: block;
+        font-weight: bold;
+        color: #2d5a7b;
+        font-size: 1.1em;
       }
       .schedule-event {
-        color: #2d5a7b;
-        margin-top: 0;
-        font-size: 1.05em;
-        font-weight: 500;
-        white-space: nowrap;
+        color: #555;
+        margin-top: 5px;
+        font-size: 1em;
+        font-weight: normal;
+        white-space: normal;
       }
       footer {
         text-align: center;
         padding: 40px;
-        background: linear-gradient(135deg, #f5e6d3, #fffdd0);
+        background: rgba(15, 25, 35, 0.8);
         border-top: 2px solid rgba(212, 163, 115, 0.3);
-        color: #2d5a7b;
+        color: #fffdd0;
         font-size: 1.1em;
       }
       #cover-page {
@@ -520,17 +515,6 @@
         <p class="tap-hint">กดเพื่อเปิด</p>
       </div>
     </div>
-
-    <div id="welcome-screen">
-      <div class="welcome-card">
-        <h2>Wedding Invitation</h2>
-        <h2>ทีน & เฟรม</h2>
-        <button onclick="openInvitation()">เปิดการ์ดเชิญ</button>
-      </div>
-    </div>
-    <div id="petals"></div>
-
-    <section class="hero">
       <div class="overlay">
         <h1>ทีน & เฟรม</h1>
         <p>ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส</p>
@@ -663,11 +647,8 @@
         coverPage.style.animation = "coverClose 0.8s ease-in forwards";
         setTimeout(() => {
           coverPage.style.display = "none";
-          document.getElementById("welcome-screen").style.display = "flex";
+          document.body.style.overflow = "auto";
         }, 800);
-      }
-      function openInvitation() {
-        document.getElementById("welcome-screen").style.display = "none";
       }
       const targetDate = new Date("2027-01-18T18:00:00").getTime();
       function updateCountdown() {

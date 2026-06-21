@@ -208,6 +208,96 @@
       .schedule li {
         margin: 10px 0;
       }
+      .couples {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+      .couple-card {
+        text-align: center;
+        background: linear-gradient(135deg, rgba(0, 100, 170, 0.05) 0%, rgba(102, 230, 255, 0.05) 100%);
+        padding: 30px;
+        border-radius: 20px;
+        border: 2px solid rgba(0, 100, 170, 0.2);
+      }
+      .couple-card h3 {
+        font-size: 1.8em;
+        color: #0044aa;
+        margin: 15px 0;
+        letter-spacing: 1px;
+      }
+      .couple-card p {
+        font-size: 1.1em;
+        color: #666;
+        line-height: 1.8;
+      }
+      .couple-card .nickname {
+        display: inline-block;
+        background: #0044aa;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+      .organizer {
+        text-align: center;
+        background: linear-gradient(135deg, rgba(102, 230, 255, 0.1) 0%, rgba(0, 150, 200, 0.05) 100%);
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 4px solid #0099ff;
+        margin-bottom: 30px;
+      }
+      .organizer p {
+        font-size: 1.1em;
+        color: #555;
+        margin: 8px 0;
+      }
+      .schedule-timeline {
+        list-style: none;
+        position: relative;
+      }
+      .schedule-timeline::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #0099ff, #66e6ff);
+      }
+      .schedule-timeline li {
+        margin: 25px 0;
+        margin-left: 70px;
+        padding: 15px;
+        position: relative;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 3px solid #0099ff;
+      }
+      .schedule-timeline li::before {
+        content: '';
+        position: absolute;
+        left: -53px;
+        top: 25px;
+        width: 15px;
+        height: 15px;
+        background: #0099ff;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px #0099ff;
+      }
+      .schedule-time {
+        font-weight: bold;
+        color: #0044aa;
+        font-size: 1.1em;
+      }
+      .schedule-event {
+        color: #555;
+        margin-top: 5px;
+      }
       footer {
         text-align: center;
         padding: 40px;
@@ -269,6 +359,21 @@
         .details {
           grid-template-columns: 1fr;
         }
+        .couples {
+          grid-template-columns: 1fr;
+        }
+        .schedule-timeline {
+          padding-left: 20px;
+        }
+        .schedule-timeline::before {
+          left: 5px;
+        }
+        .schedule-timeline li {
+          margin-left: 40px;
+        }
+        .schedule-timeline li::before {
+          left: -28px;
+        }
       }
     </style>
   </head>
@@ -308,12 +413,58 @@
         <div class="box">
           <h3 id="seconds">0</h3>
           วินาที
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">เจ้าบ่าวและเจ้าสาว</h2>
+      <div class="organizer">
+        <p><strong>เจ้าภาพ</strong></p>
+        <p>นายประเสริฐ หมดราคี &amp; นางกัญญา บัวเกตุ</p>
+      </div>
+      <div class="couples">
+        <div class="couple-card">
+          <div style="font-size: 4em;">💼</div>
+          <h3>ภัทรพงศ์ หมดราคี</h3>
+          <span class="nickname">ทีน</span>
+          <p style="margin-top: 10px;">เจ้าบ่าว</p>
+        </div>
+        <div class="couple-card">
+          <div style="font-size: 4em;">👰</div>
+          <h3>ภัททิยา บัวเกตุ</h3>
+          <span class="nickname">เฟมส์</span>
+          <p style="margin-top: 10px;">เจ้าสาว</p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2 class="title">Gallery</h2>
+      <h2 class="title">กำหนดการงานแต่ง</h2>
+      <ul class="schedule-timeline">
+        <li>
+          <div class="schedule-time">13:00 - 13:30 น.</div>
+          <div class="schedule-event">บ่าวสาวและแขกผู้มีเกียรติเข้าสถานที่</div>
+        </li>
+        <li>
+          <div class="schedule-time">13:30 - 14:00 น.</div>
+          <div class="schedule-event">พิธีน้อยหน่อยจิตต่อจิต</div>
+        </li>
+        <li>
+          <div class="schedule-time">14:00 - 14:30 น.</div>
+          <div class="schedule-event">พิธีแสดงสัญญาแต่งงาน</div>
+        </li>
+        <li>
+          <div class="schedule-time">14:30 - 15:00 น.</div>
+          <div class="schedule-event">พิธีว่างเหล้า</div>
+        </li>
+        <li>
+          <div class="schedule-time">15:00 - 17:00 น.</div>
+          <div class="schedule-event">งานเลี้ยงและรับประทานอาหาร</div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
       <div class="gallery">
         <img src="photo1.jpg" onclick="showImage(this.src)" />
         <img src="photo2.jpg" onclick="showImage(this.src)" />
